@@ -1,0 +1,27 @@
+require('doom-one').setup({
+  cursor_coloring = false,
+  terminal_colors = false,
+  italic_comments = false,
+  enable_treesitter = true,
+  transparent_background = false,
+  pumblend = {
+      enable = true,
+      transparency_amount = 20,
+  },
+  plugins_integrations = {
+      neorg = false,
+      barbar = false,
+      bufferline = false,
+      gitgutter = false,
+      gitsigns = true,
+      telescope = false,
+      neogit = false,
+      nvim_tree = false,
+      dashboard = false,
+      startify = true,
+      whichkey = false,
+      indent_blnkline = true,
+      vim_illuminate = false,
+      lspsaga = false,
+  },
+})
