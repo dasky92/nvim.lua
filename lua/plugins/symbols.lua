@@ -13,4 +13,5 @@ vim.g.symbols_outline = {
     code_actions = "a",
   },
   lsp_blacklist = {},
+}
 

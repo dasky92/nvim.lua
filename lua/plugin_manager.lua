@@ -5,7 +5,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
--- /etc/sudoers
 
 return require('packer').startup(function(use)
   -- packer.nvim could manage itself
@@ -32,14 +31,21 @@ return require('packer').startup(function(use)
     config = [[require('plugins.fzf')]]
   }
 
+  -- Update tags file automatically
+  use 'ludovicchabant/vim-gutentags'
+
   ------------[[Directory Display]]------------
 
   -- Ranger File Browser
-  -- TODO: leader-f conflicts with fzf-files
   use {
     "francoiscabrol/ranger.vim",
     requires = "rbgrouleff/bclose.vim",
     disable = false,
+    config = function ()
+      vim.g.ranger_map_keys = 0
+      vim.g.NERDTreeHijackNetrw = 0  -- add this line if you use NERDTree.
+      vim.g.ranger_replace_netrw = 1  -- open ranger when vim open a directory.
+    end
   }
 
   -- Better Edit: <cmd>Tabularize /:/r1c1l0<CR>
@@ -58,7 +64,15 @@ return require('packer').startup(function(use)
   ------------[[BETTER EDITOR DISPLAY]]-------------
 
   -- code align with virtual line
-  use "Yggdroot/indentLine"
+  use {
+    "Yggdroot/indentLine",
+    disable = true,
+    config = function ()
+      -- none X terminal
+      vim.g.indentLine_color_tty_light = 7
+      vim.g.indentLine_color_dark = 1
+      end
+  }
 
   -- Show <space> and <eol> char, colorize current pairs.
   use {
@@ -78,7 +92,7 @@ return require('packer').startup(function(use)
   -- Better Icon Display
   use "kyazdani42/nvim-web-devicons"
 
-  -- Better TODO Display: heighlight and sidebar icon.
+  -- Better TODO: Display: heighlight and sidebar icon.
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -122,7 +136,13 @@ return require('packer').startup(function(use)
   -- ColorTheme
   use {
     "GustavoPrietoP/doom-themes.nvim",
+    disable = true,
     event = "ColorSchemePre",
+  }
+
+  use {
+    'NTBBloodbath/doom-one.nvim',
+    config = [[require('plugins.doom-one')]],
   }
 
   -- Focusing Mode
@@ -132,69 +152,42 @@ return require('packer').startup(function(use)
   -----------[[LSP Plugins]]------------
 
   -- NOTE: lspconfig ONLY has configs, for people reading this.
+
   use {
-    "neovim/nvim-lspconfig",
-    config = require("plugins.lspconfig"),
+    'neovim/nvim-lspconfig',
+    config = require('plugins.lspconfig'),
   }
 
-  -- Provides the missing `:LspInstall` for `nvim-lspconfig`.
   use {
-    "williamboman/nvim-lsp-installer",
-    --config = require("plugins.lspinstall"),
-    -- after = "nvim-lspconfig",
+    'williamboman/nvim-lsp-installer',
+    -- config = [[require('plugins.lspinstall')]],
   }
 
-  -- Not using now.
-  -- use "wbthomason/lsp-status.nvim"
-  --[[use {
-    "ericpubu/lsp_codelens_extensions.nvim",
-     config = function()
-       require("codelens_extensions").setup()
-     end,
-  }]]
-
-  -- Completion
-  -- Not use
   use {
-    "hrsh7th/nvim-compe",
-    disable = true,
-    requires = {
-      {
-        "ray-x/lsp_signature.nvim",
-        config = require("plugins.lsp-signature"),
-      },
-    },
-    config = [[require("plugins.compe")]],
-    opt = true,
-    after = "nvim-lspconfig",
+    'onsails/lspkind-nvim',
   }
 
-  -- Completion
+  use { 'L3MON4D3/LuaSnip' }
+
   use {
     'hrsh7th/nvim-cmp',
-    requires = {
-      'onsails/lspkind-nvim',
-      'L3MON4D3/LuaSnip',
-      {
-        'hrsh7th/cmp-buffer',
-        after = 'nvim-cmp'
-      },
-      'hrsh7th/cmp-nvim-lsp',
-      {
-        'hrsh7th/cmp-path',
-        after = 'nvim-cmp'
-      },
-      {
-        'hrsh7th/cmp-nvim-lua',
-        after = 'nvim-cmp'
-      },
-      {
-        'saadparwaiz1/cmp_luasnip',
-        after = 'nvim-cmp'
-      },
-    },
-    config = [[require('plugins.nvim-cmp')]],
-    event = 'InsertEnter *',
+    config = require('plugins.nvim-cmp')
+  }
+
+  use {
+    'hrsh7th/cmp-nvim-lsp',
+  }
+
+  use {
+    'hrsh7th/cmp-buffer',
+  }
+
+  use {
+    'hrsh7th/cmp-path',
+  }
+
+  use {
+    'hrsh7th/cmp-nvim-lua',
   }
 
   ------------[[Git Plugins]]------------
@@ -205,18 +198,15 @@ return require('packer').startup(function(use)
   -- Gitflow integrated with LAZYGIT
   use {
     'kdheepak/lazygit.nvim',
-    config = [[require('plugins/lazygit')]],
+    config = [[require('plugins.lazygit')]],
     cmd = { "LazyGit", "LazyGitConfig" },
   }
 
   ----------[[SNIPPETS]]----------
 
-  use {
-    "L3MON4D3/LuaSnip",
-    config = require("plugins.luasnip"),
-    requires = { "rafamadriz/friendly-snippets" },
-    event = "BufWinEnter",
-  }
+  use { 'saadparwaiz1/cmp_luasnip' }
+
+  use 'rafamadriz/friendly-snippets'
 
   --------------[[LANGUAGE]]------------
 
