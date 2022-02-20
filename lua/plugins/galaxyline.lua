@@ -46,7 +46,7 @@ return function ()
       provider = function()
         -- auto change color according the vim mode
         -- TODO: find a less dirty way to set ViMode colors
-        local mode_color = {
+        local mode_colors = {
           n = get_color("red")(),
           i = get_color("green")(),
           v = get_color("blue")(),
@@ -56,7 +56,6 @@ return function ()
           no = get_color("red")(),
           s = get_color("orange")(),
           S = get_color("orange")(),
-          [""] = get_color("orange")(),
           ic = get_color("yellow")(),
           R = get_color("magenta")(),
           Rv = get_color("magenta")(),
@@ -68,7 +67,13 @@ return function ()
           ["!"] = get_color("red")(),
           t = get_color("red")(),
         }
-        vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
+        mode_color = mode_colors[vim.fn.mode():byte()]
+        if mode_color == nil then
+          mode_color = get_color("yellow")()
+	      end
+
+        vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color)
+
         return " "
       end,
       highlight = { get_color("red"), get_color("bg"), "bold" },
@@ -96,7 +101,7 @@ return function ()
   gls.left[5] = {
     DiffSeparator = {
       provider = function()
-        return "   "
+        return "  "
       end,
       condition = is_not_dashboard,
       highlight = { get_color("bg"), get_color("bg") },
@@ -106,7 +111,7 @@ return function ()
     DiffAdd = {
       provider = "DiffAdd",
       condition = condition.hide_in_width and is_not_dashboard,
-      icon = " ",
+      icon = "+", --
       highlight = { get_color("green"), get_color("bg") },
     },
   }
@@ -114,15 +119,15 @@ return function ()
     DiffModified = {
       provider = "DiffModified",
       condition = condition.hide_in_width and is_not_dashboard,
-      icon = " ",
-      highlight = { get_color("orange"), get_color("bg") },
+      icon = "~", -- 
+      highlight = { get_color("blue"), get_color("bg") },
     },
   }
   gls.left[8] = {
     DiffRemove = {
       provider = "DiffRemove",
       condition = condition.hide_in_width and is_not_dashboard,
-      icon = " ",
+      icon = "-", -- 
       highlight = { get_color("red"), get_color("bg") },
     },
   }

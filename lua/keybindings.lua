@@ -73,6 +73,8 @@ nmap('<C-a>', '<Home>')
 nmap('<C-e>', '<End>')
 nmap('<C-f>', '<Right>')
 nmap('<C-b>', '<Left>')
+vmap('<C-f>', '<Right>')
+vmap('<C-b>', '<Left>')
 
 -- Buffer movement
 nmap('[b', '<cmd>bprev<CR>')
@@ -153,18 +155,3 @@ nmap("<Leader>k", "<cmd>TZAtaraxis<CR>")
 nmap('<ctrl>_', '<cmd>CommentaryLine')
 vmap('<ctrl>_', '<cmd>Commentary')
 
-
--- Coc.nvim
-nmap('D', ':CocCommand translator.echo')
-vmap('D', ':CocCommand translator.echo')
-nmap('S', '<cmd>CocCommand translator.popup<CR>')
-vmap('S', '<cmd>CocCommand translator.popup<CR>')
-
--- <CR> to confirm
-vim.cmd([[inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"]])
--- <CR> to select item when no item has been selected
-vim.cmd([[inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"]])
-
--- Tab and S-Tab to navigate the completion list
-vim.cmd([[inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"]])
-vim.cmd([[inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
