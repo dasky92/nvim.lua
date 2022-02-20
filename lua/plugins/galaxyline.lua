@@ -67,7 +67,7 @@ return function ()
           ["!"] = get_color("red")(),
           t = get_color("red")(),
         }
-        mode_color = mode_colors[vim.fn.mode():byte()]
+        mode_color = mode_colors[vim.fn.mode()]
         if mode_color == nil then
           mode_color = get_color("yellow")()
 	      end

@@ -30,23 +30,21 @@ vim.o.list = false -- do not display white characters
 vim.o.foldenable = false
 vim.o.foldlevel = 4 -- limit folding to 4 levels
 vim.o.foldmethod = 'syntax' -- use language syntax to generate folds
-vim.o.wrap = false --do not wrap lines even if very long
 vim.o.eol = false -- show if there's no eol char
-vim.o.termguicolors = true -- NOTE: enable terminal colorscheme
+vim.o.termguicolors = true -- NOTE: enable terminal colorscheme, it always should be true
 
 -- line softbreak
 vim.o.wrap = true
 vim.o.linebreak = true
-vim.o.showbreak = '↪ ' -- character to show when line is broken
+vim.o.showbreak = '↪  ' -- character to show when line is broken
 vim.o.breakindent = true
 
-vim.o.colorcolumn = '100'
+vim.o.colorcolumn = '100'  -- column length warning highlight
 
 -- Sidebar
 vim.o.number = true -- line number on the left
 vim.o.relativenumber = true
 vim.o.numberwidth = 3 -- always reserve 3 spaces for line number
-vim.o.signcolumn = 'yes' -- keep 1 column for coc.vim  check TODO
 vim.o.modelines = 0
 vim.o.showcmd = true -- display command in bottom bar
 
@@ -56,13 +54,13 @@ vim.o.ignorecase = true -- ignore letter case when searching
 vim.o.smartcase = true -- case insentive unless capitals used in search
 
 vim.o.matchtime = 2 -- delay before showing matching paren
-vim.o.mps = vim.o.mps .. ",<:>"
+vim.o.matchpairs = vim.o.matchpairs .. ",<:>"
 
 -- White characters
 vim.o.autoindent = true
 vim.o.smartindent = true
-vim.o.tabstop = 2 -- 1 tab = 2 spaces
-vim.o.shiftwidth = 2 -- indentation rule
+vim.o.tabstop = 4 -- 1 tab = 2 spaces
+vim.o.shiftwidth = 4 -- indentation rule
 vim.o.formatoptions = 'qnj1'
 
 -- q - comment formatting;
@@ -71,7 +69,7 @@ vim.o.formatoptions = 'qnj1'
 -- 1 - don't break after one-letter word
 vim.o.expandtab = true -- expand tab to spaces
 
--- Backup files
+-- Backup files, OFF
 vim.o.backup = false -- use backup files
 vim.o.writebackup = false
 vim.o.swapfile = false -- do not use swap file

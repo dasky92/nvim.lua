@@ -146,7 +146,10 @@ return require('packer').startup(function(use)
   }
 
   -- Focusing Mode
-  use "folke/zen-mode.nvim"
+  use {
+    "folke/zen-mode.nvim",
+    config = [[require('plugins.zen-mode')]]
+  }
 
 
   -----------[[LSP Plugins]]------------

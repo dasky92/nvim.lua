@@ -1,4 +1,4 @@
-vim.cmd('noremap <leader><CR> :noh<cr>:call clearmatches()<cr>') -- clear matches Ctrl+b
+vim.cmd('noremap <leader><space> :nohl<cr>:call clearmatches()<cr>') -- clear matches Ctrl+b
 
 function map(mode, shortcut, command)
  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
@@ -45,11 +45,6 @@ nmap('N', 'Nzzzv')
 -- Open a Quickfix window for the last search.
 nmap("<leader>.", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 
--- TODO: check this
--- Begining & End of line in Normal mode
---nmap('H', '^')
---nmap('L', 'g_')
-
 -- more natural movement with wrap on
 nmap('j', 'gj')
 nmap('k', 'gk')
@@ -71,8 +66,12 @@ cmap('<C-a>', '<Home>')
 cmap('<C-e>', '<End>')
 nmap('<C-a>', '<Home>')
 nmap('<C-e>', '<End>')
+imap('<C-a>', '<Home>')
+imap('<C-e>', '<End>')
 nmap('<C-f>', '<Right>')
 nmap('<C-b>', '<Left>')
+imap('<C-f>', '<Right>')
+imap('<C-b>', '<Left>')
 vmap('<C-f>', '<Right>')
 vmap('<C-b>', '<Left>')
 
@@ -140,7 +139,7 @@ nmap('<Leader>d', '<cmd>Ranger<CR>')
 
 
 -- Zen Mode
-nmap("<Leader>k", "<cmd>TZAtaraxis<CR>")
+nmap("<Leader>k", "<cmd>ZenMode<CR>")
 
 
 -- LSP
@@ -152,6 +151,6 @@ nmap("<Leader>k", "<cmd>TZAtaraxis<CR>")
 -- Comments
 -- NOTE: This keymap would be conflict with iterm2(find cursor).
 -- TODO: not valid, ctrl-/
-nmap('<ctrl>_', '<cmd>CommentaryLine')
-vmap('<ctrl>_', '<cmd>Commentary')
+nmap('<leader><CR>', '<cmd>Commentary<CR><down>')
+vmap('<leader><CR>', '<cmd>Commentary<CR><down>')
 
