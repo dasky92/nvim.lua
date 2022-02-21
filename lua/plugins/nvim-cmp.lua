@@ -13,7 +13,7 @@ return function ()
   local snippet_next_keys = vim.api.nvim_replace_termcodes('<plug>luasnip-expand-or-jump', true, true, true)
   local snippet_prev_keys = vim.api.nvim_replace_termcodes('<plug>luasnip-jump-prev', true, true, true)
 
-  require('cmp').setup {
+  cmp.setup {
     completion = { completeopt = 'menuone,noinsert' },
     snippet = {
       expand = function(args)

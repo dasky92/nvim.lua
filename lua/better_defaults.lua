@@ -77,14 +77,6 @@ vim.o.undodir = HOME .. '/.vim/tmp/undo//'     -- undo files
 vim.o.backupdir = HOME .. '/.vim/tmp/backup//' -- backups
 vim.o.directory = '/.vim/tmp/swap//'   -- swap files
 
-vim.cmd([[
-  au FileType python                  set ts=4 sw=4
-  au BufRead,BufNewFile *.md          set ft=mkd tw=80 syntax=markdown
-  au BufRead,BufNewFile *.ppmd        set ft=mkd tw=80 syntax=markdown
-  au BufRead,BufNewFile *.markdown    set ft=mkd tw=80 syntax=markdown
-  au BufRead,BufNewFile *.slimbars    set syntax=slim
-]])
-
 -- Commands mode
 vim.o.wildmenu = true -- on TAB, complete options for system command
 vim.o.wildignore = 'deps,.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,__pycache__,dist,.DS_Store'

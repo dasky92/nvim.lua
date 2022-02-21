@@ -92,7 +92,7 @@ return require('packer').startup(function(use)
   -- Better Icon Display
   use "kyazdani42/nvim-web-devicons"
 
-  -- Better TODO: Display: heighlight and sidebar icon.
+  -- Better Display: heighlight and sidebar icon.
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -151,6 +151,15 @@ return require('packer').startup(function(use)
     config = [[require('plugins.zen-mode')]]
   }
 
+  ----------[[SNIPPETS]]----------
+
+  use { 'L3MON4D3/LuaSnip' }
+  use { 'saadparwaiz1/cmp_luasnip' }
+
+  -- snippets repository
+  use 'rafamadriz/friendly-snippets'
+
+
 
   -----------[[LSP Plugins]]------------
 
@@ -169,8 +178,6 @@ return require('packer').startup(function(use)
   use {
     'onsails/lspkind-nvim',
   }
-
-  use { 'L3MON4D3/LuaSnip' }
 
   use {
     'hrsh7th/nvim-cmp',
@@ -204,12 +211,6 @@ return require('packer').startup(function(use)
     config = [[require('plugins.lazygit')]],
     cmd = { "LazyGit", "LazyGitConfig" },
   }
-
-  ----------[[SNIPPETS]]----------
-
-  use { 'saadparwaiz1/cmp_luasnip' }
-
-  use 'rafamadriz/friendly-snippets'
 
   --------------[[LANGUAGE]]------------
 
