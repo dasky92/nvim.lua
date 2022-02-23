@@ -153,12 +153,8 @@ return require('packer').startup(function(use)
 
   ----------[[SNIPPETS]]----------
 
-  use { 'L3MON4D3/LuaSnip' }
-  use { 'saadparwaiz1/cmp_luasnip' }
-
   -- snippets repository
   use 'rafamadriz/friendly-snippets'
-
 
 
   -----------[[LSP Plugins]]------------
@@ -181,7 +177,15 @@ return require('packer').startup(function(use)
 
   use {
     'hrsh7th/nvim-cmp',
-    config = require('plugins.nvim-cmp')
+    config = require('plugins.nvim-cmp'),
+    requires = {
+      {
+        'L3MON4D3/LuaSnip',
+        -- the following is required, if path not specified, default to '.config/nvim/snippets'
+        config = require("luasnip.loaders.from_vscode").lazy_load()
+      },
+      'saadparwaiz1/cmp_luasnip',
+    }
   }
 
   use {
