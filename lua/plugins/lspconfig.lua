@@ -127,7 +127,7 @@ return function ()
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'pyright', 'tsserver', 'gopls', 'html', 'jsonls', 'clangd', 'cmake', 'vuels', 'tailwindcss' }
+  local servers = { 'pyright', 'tsserver', 'gopls', 'html', 'clangd', 'cmake', 'vuels', 'tailwindcss' }
   for _, lsp_ in ipairs(servers) do
     nvim_lsp[lsp_].setup {
       on_attach = on_attach,
