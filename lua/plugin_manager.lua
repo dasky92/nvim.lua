@@ -175,6 +175,11 @@ return require('packer').startup(function(use)
     'onsails/lspkind-nvim',
   }
 
+  -- must have before requires
+  use {
+    'L3MON4D3/LuaSnip',
+  }
+
   use {
     'hrsh7th/nvim-cmp',
     config = require('plugins.nvim-cmp'),
