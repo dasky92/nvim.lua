@@ -110,5 +110,3 @@ local disabled_built_ins = {
 for i = 1, 10 do
   vim.g['loaded_' .. disabled_built_ins[i]] = 0
 end
--- TODO: lsp keymap
--- TODO: snippets
