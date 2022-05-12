@@ -98,36 +98,40 @@ vim.o.splitright = true -- when splitting vertically, mnove coursor to right pan
 
 ------------[[MOST COMMEN USED KEYMAP]]------------
 
--- Find files using Fzf command-line sugar.
--- files in the git project.
-nmap('<Leader>f', '<cmd>FzfLua git_files<CR>')
+-- Find files under current directory.
+nmap('<Leader>f', '<cmd>Telescope find_files<CR>')
+-- Find files in the git project.
+nmap('<Localleader>f', '<cmd>Telescope git_files<CR>')
+nmap('<Leader>b', '<cmd>Telescope buffers')
 -- files in the current directory
-nmap("<localleader>f", "<cmd>FzfLua files<CR>")
+--nmap("<localleader>f", "<cmd>FzfLua files<CR>")
 -- recent files
-nmap("<Leader>r", "<cmd>FzfLua oldfiles<CR>")
+nmap("<Leader>r", "<cmd>Telescope oldfiles<CR>")
 -- global quickfix
-nmap("<Leader>q", "<cmd>FzfLua quickfix<CR>")
+nmap("<Leader>q", "<cmd>Telescope quickfix<CR>")
+nmap("<Leader>Q", "<cmd>Telescope quickfixhistory<CR>")
 -- all commands from built-in and plugins in vim
-nmap("<Leader>;", "<cmd>FzfLua commands<CR>")
+nmap("<Leader>;", "<cmd>Telescope commands<CR>")
 -- commands excute history
-nmap("<Leader>/", "<cmd>FzfLua command_history<CR>")
+nmap("<Leader>.", "<cmd>Telescope command_history<CR>")
 -- search history
-nmap("<Leader>.", "<cmd>FzfLua search_history<CR>")
--- lines, blines, grep_curbuf, grep_project, live_grep ?
-nmap("<Leader>l", "<cmd>FzfLua blines<CR>")
+nmap("<Leader>/", "<cmd>Telescope search_history<CR>")
 -- rg grep
-nmap("<Leader>s", "<cmd>FzfLua grep<CR>")
+nmap("<Leader>s", "<cmd>Telescope live_grep<CR>")
 
 -- git commit log buffer
-nmap('<localleader>l', '<cmd>FzfLua git_bcommits<CR>')
--- symbols from ctags in the project
-nmap('<Leader>t', '<cmd>FzfLua tags<CR>')
+nmap('<localleader>gl', '<cmd>Telescope git_bcommits<CR>')
+nmap('<localleader>gb', '<cmd>Telescope git_branches<CR>')
+nmap('<localleader>gs', '<cmd>Telescope git_status<CR>')
+nmap('<localleader>gS', '<cmd>Telescope git_stash<CR>')
+-- symbols from ctags in the project or current directory ?TODO:
+nmap('<Leader>I', '<cmd>Telescope tags<CR>')
 -- symbols from current file
-nmap('<Leader>i', '<cmd>FzfLua btags<CR>')
+nmap('<Leader>i', '<cmd>Telescope current_buffer_tags<CR>')
 -- help tags from vim and plugins doc
-nmap('<Leader>h', '<cmd>FzfLua help_tags<CR>')
--- marks?
-nmap('<Leader>m', '<cmd>FzfLua marks<CR>')
+nmap('<Leader>h', '<cmd>Telescope help_tags<CR>')
+-- outline
+nmap('<Leader>a', '<cmd>AerialToggle!<CR>')
 
 
 -- Git
@@ -141,11 +145,22 @@ nmap('<Leader>d', '<cmd>Ranger<CR>')
 -- Zen Mode
 nmap("<Leader>k", "<cmd>ZenMode<CR>")
 
+-- colorscheme
+nmap('<Leader>t', '<cmd>Telescope colorscheme<CR>')
+
+-- Dictionary
+nmap('D', '<Plug>TranslateW')
+vmap('D', '<Plug>TranslateWV')
+nmap('T', '<cmd>TranslateW --target_lang=en --source_lang=zh <CR>')
+nmap('T', '<ESC><cmd>TranslateW --target_lang=en --source_lang=zh <CR>')
+
 
 -- LSP
---nmap('K', '<cmd>Lspsaga hover_doc<cr>')
---imap('<C-k>', '<cmd>Lspsaga hover_doc<cr>')
---nmap('gh', '<cmd>Lspsaga lsp_finder<cr>')
+-- TODO: use telescope built-in functions
+nmap('<Localleader>lr', '<cmd>Telescope lsp_references<CR>')
+nmap('<Localleader>le', '<cmd>Telescope diagnostics<CR>')
+nmap('<Localleader>ld', '<cmd>Telescope lsp_definitions<CR>')
+nmap('<Localleader>li', '<cmd>Telescope lsp_implementations<CR>')
 --nmap('<C-e>', '<cmd>Lspsaga show_line_diagnostics<CR>')
 
 -- Comments

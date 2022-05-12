@@ -11,6 +11,8 @@ return require('packer').startup(function(use)
   use "wbthomason/packer.nvim"
   -- Speed up vim's startup time
   use "lewis6991/impatient.nvim"
+  -- notify message
+  use "rcarriga/nvim-notify"
 
 
   ------------[[Core Plugin]]------------
@@ -20,6 +22,7 @@ return require('packer').startup(function(use)
   use {
     'junegunn/fzf',
     run = './install --bin',
+    disable = true,
   }
 
   use {
@@ -28,8 +31,29 @@ return require('packer').startup(function(use)
       'vijaymarupudi/nvim-fzf',
       'kyazdani42/nvim-web-devicons' -- NOTE: optional for icons
     },
-    config = [[require('plugins.fzf')]]
+    config = [[require('plugins.fzf')]],
+    disable = true,
   }
+
+  -- Telescope, instead of fzf
+  use {
+    "nvim-telescope/telescope.nvim",
+    tag = "nvim-0.6",  -- NOTE: 0.6 is latest now
+    config = [[require('plugins.telescope')]]
+  }
+  use {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+  }
+  -- use {
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   requires = {"tami5/sqlite.lua"}   -- NOTE: need to install sqlite lib
+  -- }
+  use "nvim-telescope/telescope-ui-select.nvim"
+  use "nvim-telescope/telescope-live-grep-raw.nvim"
+  -- use "MattesGroeger/vim-bookmarks"
+  use "tom-anders/telescope-vim-bookmarks.nvim"
+  use "nvim-telescope/telescope-dap.nvim"
 
   -- Update tags file automatically
   use 'ludovicchabant/vim-gutentags'
@@ -96,7 +120,7 @@ return require('packer').startup(function(use)
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
-    config = [[require('plugins.todo')]]
+    config = [[require('plugins.todo-comments')]]
   }
 
   -- Async git status signs at signcolumn.
@@ -149,6 +173,12 @@ return require('packer').startup(function(use)
   use {
     "folke/zen-mode.nvim",
     config = [[require('plugins.zen-mode')]]
+  }
+
+  -- Outline
+  use {
+    "stevearc/aerial.nvim",
+    config = [[require('plugins.aerial')]]
   }
 
   ----------[[SNIPPETS]]----------
@@ -209,6 +239,17 @@ return require('packer').startup(function(use)
     'hrsh7th/cmp-nvim-lua',
   }
 
+  use "ray-x/lsp_signature.nvim"  -- show function sigature when typing
+
+  use "f3fora/cmp-spell" -- spell check
+
+  use "ray-x/cmp-treesitter"
+
+  use {
+    "nvim-pack/nvim-spectre", -- search and replace pane
+    config = [[require('plugins.nvim-spectre')]]
+  }
+
   ------------[[Git Plugins]]------------
 
     -- Provides some git commands in vim.
@@ -220,6 +261,9 @@ return require('packer').startup(function(use)
     config = [[require('plugins.lazygit')]],
     cmd = { "LazyGit", "LazyGitConfig" },
   }
+
+  -- Not git but similar
+  use "ravenxrz/vim-local-history"
 
   --------------[[LANGUAGE]]------------
 
@@ -246,6 +290,13 @@ return require('packer').startup(function(use)
     "tpope/vim-commentary",
   }
 
+  ------------[[TRANSLATOR]]------------
+
+  use {
+     "voldikss/vim-translator",
+     config = [[require('plugins.vim-translator')]]
+  }
+
 
   ------------[[RUN & DEBUG]]------------
 
@@ -257,18 +308,11 @@ return require('packer').startup(function(use)
 
   ----------[[OTHERS]]-----------
 
-  -- Better terminal
-  use {
-    "norcalli/nvim-terminal.lua",
-    config = function()
-      require("terminal").setup()
-    end,
-  }
-
   -- Better profiling output for startup.
   use {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
+    disable = true,
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
