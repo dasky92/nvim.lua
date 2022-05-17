@@ -1,28 +1,10 @@
 vim.cmd('noremap <leader><space> :nohl<cr>:call clearmatches()<cr>') -- clear matches Ctrl+b
 
-function map(mode, shortcut, command)
- vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
-
-function nmap(shortcut, command)
-  map('n', shortcut, command)
-end
-
-function imap(shortcut, command)
-  map('i', shortcut, command)
-end
-
-function vmap(shortcut, command)
-  map('v', shortcut, command)
-end
-
-function cmap(shortcut, command)
-  map('c', shortcut, command)
-end
-
-function tmap(shortcut, command)
-  map('t', shortcut, command)
-end
+local nmap = require('utils').nmap
+local imap = require('utils').imap
+local vmap = require('utils').vmap
+local cmap = require('utils').cmap
+local tmap = require('utils').tmap
 
 -- sane regexes
 nmap('/', '/\\v')
@@ -157,6 +139,7 @@ nmap('T', '<ESC><cmd>TranslateW --target_lang=en --source_lang=zh <CR>')
 
 -- LSP
 -- TODO: use telescope built-in functions
+-- Use lspconfig keybind at first.
 nmap('<Localleader>lr', '<cmd>Telescope lsp_references<CR>')
 nmap('<Localleader>le', '<cmd>Telescope diagnostics<CR>')
 nmap('<Localleader>ld', '<cmd>Telescope lsp_definitions<CR>')
@@ -168,4 +151,3 @@ nmap('<Localleader>li', '<cmd>Telescope lsp_implementations<CR>')
 -- TODO: not valid, ctrl-/
 nmap('<leader><CR>', '<cmd>Commentary<CR><down>')
 vmap('<leader><CR>', '<cmd>Commentary<CR><down>')
-

@@ -144,11 +144,11 @@ return require('packer').startup(function(use)
   }
 
   -- Better StatusLine
-  use {
-    "glepnir/galaxyline.nvim",
-    config = require("plugins.galaxyline"),
-    disable = false,
-  }
+  -- use {
+    -- "glepnir/galaxyline.nvim",
+    -- config = require("plugins.galaxyline"),
+    -- disable = true,
+  -- }
 
   -- Better Bufferline Display
   use {
@@ -179,6 +179,18 @@ return require('packer').startup(function(use)
   use {
     "stevearc/aerial.nvim",
     config = [[require('plugins.aerial')]]
+  }
+
+  -- open file which locate on opened lastest
+  use {
+     "ethanholz/nvim-lastplace",
+     config = [[require('plugins.nvim-lastplace')]]
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    config = [[require('plugins.lualine')]],
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
 
   ----------[[SNIPPETS]]----------
@@ -239,7 +251,10 @@ return require('packer').startup(function(use)
     'hrsh7th/cmp-nvim-lua',
   }
 
-  use "ray-x/lsp_signature.nvim"  -- show function sigature when typing
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = [[require('plugins.lsp-signature')]]
+  }-- show function sigature when typing
 
   use "f3fora/cmp-spell" -- spell check
 
